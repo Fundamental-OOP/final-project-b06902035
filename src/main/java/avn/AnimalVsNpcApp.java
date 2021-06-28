@@ -68,7 +68,7 @@ public class AnimalVsNpcApp extends GameApplication {
             private Rectangle2D worldBounds = new Rectangle2D(0, 110, getAppWidth(), getAppHeight() - 100);
             @Override
             protected void onActionBegin() {
-                if (worldBounds.contains(input.getMousePositionWorld())) {
+                if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
                     placeAnimal();
                 }
             }
