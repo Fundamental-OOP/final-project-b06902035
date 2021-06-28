@@ -65,11 +65,13 @@ public class AnimalVsNpcApp extends GameApplication {
     protected void initInput() {
         Input input = getInput();
         input.addAction(new UserAction("Place Animal") {
-            private Rectangle2D worldBounds = new Rectangle2D(0, 110, getAppWidth(), getAppHeight() - 100);
+            private Rectangle2D worldBounds = new Rectangle2D(45, 114, 895, 589);
             @Override
             protected void onActionBegin() {
                 if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
-                    placeAnimal();
+                    int i = (int)(input.getMousePositionWorld().getX() - 45) / 99;
+                    int j = (int)(input.getMousePositionWorld().getY() - 114) / 118;
+                    placeAnimal(Config.spawnPointX[i], Config.spawnPointY[j]);
                 }
             }
         }, MouseButton.PRIMARY);
@@ -90,9 +92,8 @@ public class AnimalVsNpcApp extends GameApplication {
             getGameScene().addUINode(icon);
         }
     }
-    private void placeAnimal() {
-        SpawnData spawnData = new SpawnData(getInput().getMouseXWorld(),
-                getInput().getMouseYWorld())
+    private void placeAnimal(int x, int y) {
+        SpawnData spawnData = new SpawnData(x, y)
                 .put("selected", selected);
         getGameWorld().spawn("Animal", spawnData);
     }
