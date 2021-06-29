@@ -13,11 +13,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class BlueBirdComponent extends AnimalComponent{
 	public BlueBirdComponent() {
 		// STR, HP, Range, CD, Cost
-		super(0, 200, 0, 10, 1);
-	}
-	@Override
-	public String getImageName() {
-		return "BlueBird.jpg";
+		super(0, 200, 0, 10, 1, "BlueBird.jpg");
 	}
 	@Override
     public void onUpdate(double tpf) {
