@@ -27,4 +27,12 @@ public abstract class UnitComponent extends Component{
         timer = newLocalTimer();
 		timer.capture();
     }
+	@Override
+    public void onUpdate(double tpf) {
+        if (timer.elapsed(CD)) {
+			performAction();
+			timer.capture();
+		}
+	}
+	abstract public void performAction();
 }
