@@ -16,6 +16,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import java.util.ArrayList;
@@ -61,7 +62,10 @@ public class AnimalVsNpcApp extends GameApplication {
         // TODO: load animal component of newly added animals
         animalComponents.add(new BlueBirdComponent());
     }
-
+    @Override
+    protected void initGameVars(Map<String, Object> vars) {
+        vars.put("energy", 50);
+    }
     @Override
     protected void initInput() {
         Input input = getInput();
@@ -95,6 +99,13 @@ public class AnimalVsNpcApp extends GameApplication {
             });
             getGameScene().addUINode(icon);
         }
+        // set text bar to show enery
+        Text uiEnergy = new Text("");
+        uiEnergy.setFont(Font.font(20));
+        uiEnergy.setTranslateX(34);
+        uiEnergy.setTranslateY(100);
+        uiEnergy.textProperty().bind(getip("energy").asString());
+        getGameScene().addUINode(uiEnergy);
     }
     private void placeAnimal(int x, int y) {
         SpawnData spawnData = new SpawnData(x, y)
