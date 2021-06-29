@@ -11,20 +11,17 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class BlueBirdComponent extends AnimalComponent{
-
-	private LocalTimer timer;
-	private Duration interval = Duration.seconds(5);
+	public BlueBirdComponent() {
+		// STR, HP, Range, CD, Cost
+		super(0, 200, 0, 10, 1);
+	}
 	@Override
 	public String getImageName() {
 		return "BlueBird.jpg";
 	}
-    @Override
-    public void onAdded() {
-        timer = newLocalTimer();
-    }
 	@Override
     public void onUpdate(double tpf) {
-        if (timer.elapsed(interval)) {
+        if (timer.elapsed(CD)) {
 			layEgg();
 			timer.capture();
 		}

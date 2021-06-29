@@ -64,7 +64,7 @@ public class AnimalVsNpcApp extends GameApplication {
     }
     @Override
     protected void initGameVars(Map<String, Object> vars) {
-        vars.put("energy", 50);
+        vars.put("eggs", 2);
     }
     @Override
     protected void initInput() {
@@ -77,8 +77,11 @@ public class AnimalVsNpcApp extends GameApplication {
                     int i = (int)(input.getMousePositionWorld().getX() - 45) / 99;
                     int j = (int)(input.getMousePositionWorld().getY() - 114) / 118;
                     if (!isOccupied[i][j]) {
+                        int cost = selected.getCost();
+                        inc("eggs", -cost);
                         placeAnimal(Config.spawnPointX[i], Config.spawnPointY[j]);
                         isOccupied[i][j] = true;
+                        selected = null;
                     }
                 }
             }
@@ -100,12 +103,12 @@ public class AnimalVsNpcApp extends GameApplication {
             getGameScene().addUINode(icon);
         }
         // set text bar to show enery
-        Text uiEnergy = new Text("");
-        uiEnergy.setFont(Font.font(20));
-        uiEnergy.setTranslateX(34);
-        uiEnergy.setTranslateY(100);
-        uiEnergy.textProperty().bind(getip("energy").asString());
-        getGameScene().addUINode(uiEnergy);
+        Text uiEggs = new Text("");
+        uiEggs.setFont(Font.font(20));
+        uiEggs.setTranslateX(34);
+        uiEggs.setTranslateY(100);
+        uiEggs.textProperty().bind(getip("eggs").asString());
+        getGameScene().addUINode(uiEggs);
     }
     private void placeAnimal(int x, int y) {
         SpawnData spawnData = new SpawnData(x, y)

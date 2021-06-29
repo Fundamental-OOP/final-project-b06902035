@@ -37,7 +37,7 @@ public class AnimalVsNpcFactory implements EntityFactory{
 				.type(AnimalVsNpcType.BIRDEGG)
 				.viewWithBBox("BirdEgg.png")
 				.onClick(e -> {
-					FXGL.inc("energy", +50);
+					FXGL.inc("eggs", +1);
 					e.removeFromWorld();
 				})
                 .build();
