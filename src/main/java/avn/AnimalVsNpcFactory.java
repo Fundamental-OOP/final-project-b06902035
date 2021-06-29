@@ -24,7 +24,7 @@ public class AnimalVsNpcFactory implements EntityFactory{
 		}
 		return entityBuilder(data)
 				.type(AnimalVsNpcType.ANIMAL)
-				.viewWithBBox(selected.getImageName())
+				.view(selected.getImageName())
                 .with(new CollidableComponent(true))
                 .with(ac)
                 .build();

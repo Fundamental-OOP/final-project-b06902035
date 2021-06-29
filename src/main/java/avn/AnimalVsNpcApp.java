@@ -42,6 +42,7 @@ public class AnimalVsNpcApp extends GameApplication {
     AnimalComponent selected;
     // the selected animal component
     // change this when clicking menu icons
+    boolean[][] isOccupied = new boolean[9][5];
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -71,7 +72,10 @@ public class AnimalVsNpcApp extends GameApplication {
                 if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
                     int i = (int)(input.getMousePositionWorld().getX() - 45) / 99;
                     int j = (int)(input.getMousePositionWorld().getY() - 114) / 118;
-                    placeAnimal(Config.spawnPointX[i], Config.spawnPointY[j]);
+                    if (!isOccupied[i][j]) {
+                        placeAnimal(Config.spawnPointX[i], Config.spawnPointY[j]);
+                        isOccupied[i][j] = true;
+                    }
                 }
             }
         }, MouseButton.PRIMARY);

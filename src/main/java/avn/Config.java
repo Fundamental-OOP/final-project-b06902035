@@ -4,11 +4,11 @@ import javafx.geometry.Point2D;
 
 public class Config {
 	public static Point2D[] npcSpawnPoints = new Point2D[] {
-			new Point2D(999, 160),
-			new Point2D(999, 288),
-			new Point2D(999, 418),
-			new Point2D(999, 523),
-			new Point2D(999, 647)
+			new Point2D(940, 129),
+			new Point2D(940, 242),
+			new Point2D(940, 357),
+			new Point2D(940, 490),
+			new Point2D(940, 609)
 	};
 	public static int[] spawnPointX = new int[] {
 			57, 152, 255, 360, 458, 563, 660, 766, 865
