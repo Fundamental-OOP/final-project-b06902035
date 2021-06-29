@@ -11,6 +11,8 @@ import avn.animal.AnimalComponent;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
+import com.almasb.fxgl.dsl.FXGL;
+
 public class AnimalVsNpcFactory implements EntityFactory{
 	@Spawns("Animal")
 	public Entity spawnAnimal(SpawnData data) {
@@ -27,6 +29,17 @@ public class AnimalVsNpcFactory implements EntityFactory{
 				.view(selected.getImageName())
                 .with(new CollidableComponent(true))
                 .with(ac)
+                .build();
+	}
+	@Spawns("BirdEgg")
+	public Entity spawnBirdEgg(SpawnData data) {
+		return entityBuilder(data)
+				.type(AnimalVsNpcType.BIRDEGG)
+				.viewWithBBox("BirdEgg.png")
+				.onClick(e -> {
+					FXGL.inc("energy", +50);
+					e.removeFromWorld();
+				})
                 .build();
 	}
 }
