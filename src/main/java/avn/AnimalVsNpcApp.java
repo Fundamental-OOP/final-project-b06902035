@@ -30,17 +30,6 @@ import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * This is an example of a tower defense game.
- *
- * Demo:
- * 1. Enemies move using waypoints
- * 2. Player can place towers
- * 3. Towers can shoot enemies
- * 4. Game ends if enemies are dead or have reached the last waypoint
- *
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class AnimalVsNpcApp extends GameApplication {
 
     List<NpcComponent> npcComponents = new ArrayList<>();
@@ -111,7 +100,6 @@ public class AnimalVsNpcApp extends GameApplication {
             }
         }, MouseButton.PRIMARY);
     }
-
     @Override
     protected void initUI() {
         // set icon on the top memu bar
@@ -135,6 +123,7 @@ public class AnimalVsNpcApp extends GameApplication {
         uiEggs.textProperty().bind(getip("eggs").asString());
         getGameScene().addUINode(uiEggs);
     }
+    
     private void placeAnimal(int x, int y) {
         SpawnData spawnData = new SpawnData(x, y)
                 .put("selected", selected);
@@ -145,6 +134,7 @@ public class AnimalVsNpcApp extends GameApplication {
                 .put("component", nc);
         getGameWorld().spawn("Npc", spawnData);
     }
+    
     public static void main(String[] args) {
         launch(args);
     }
