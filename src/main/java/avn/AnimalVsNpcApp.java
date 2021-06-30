@@ -9,6 +9,8 @@ import com.almasb.fxgl.texture.Texture;
 import avn.animal.AnimalComponent;
 import avn.animal.AnimalIcon;
 import avn.animal.BlueBirdComponent;
+import avn.npc.BirdHunterComponent;
+import avn.npc.NpcComponent;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Point2D;
@@ -39,6 +41,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
  */
 public class AnimalVsNpcApp extends GameApplication {
 
+    List<NpcComponent> npcComponents = new ArrayList<>();
     List<AnimalComponent> animalComponents = new ArrayList<>();
     AnimalComponent selected;
     // the selected animal component
@@ -61,6 +64,11 @@ public class AnimalVsNpcApp extends GameApplication {
         loopBGM("Grasswalk.mp3");
         // TODO: load animal component of newly added animals
         animalComponents.add(new BlueBirdComponent());
+        // TODO: load npc components
+        npcComponents.add(new BirdHunterComponent());
+
+        // schedule the occurrence of npcs
+        spawnNpc(npcComponents.get(0), 2);
     }
     @Override
     protected void initGameVars(Map<String, Object> vars) {
@@ -114,6 +122,11 @@ public class AnimalVsNpcApp extends GameApplication {
         SpawnData spawnData = new SpawnData(x, y)
                 .put("selected", selected);
         getGameWorld().spawn("Animal", spawnData);
+    }
+    private void spawnNpc(NpcComponent nc, int row) {
+        SpawnData spawnData = new SpawnData(Config.npcSpawnPoints[row])
+                .put("component", nc);
+        getGameWorld().spawn("Npc", spawnData);
     }
     public static void main(String[] args) {
         launch(args);

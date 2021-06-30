@@ -16,7 +16,7 @@ public class BlueBirdComponent extends AnimalComponent{
 		super(0, 200, 0, 10, 1, "BlueBird.jpg");
 	}
 	@Override
-	public void performAttack() {
+	protected void performAttack() {
 		Point2D position = getEntity().getPosition();
 		int x = (int)position.getX() + 20;
 		int y = (int)position.getY() + 20;

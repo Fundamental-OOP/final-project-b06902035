@@ -8,6 +8,7 @@ import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.texture.Texture;
 
 import avn.animal.AnimalComponent;
+import avn.npc.NpcComponent;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
@@ -29,6 +30,23 @@ public class AnimalVsNpcFactory implements EntityFactory{
 				.view(selected.getImageName())
                 .with(new CollidableComponent(true))
                 .with(ac)
+                .build();
+	}
+	@Spawns("Npc")
+	public Entity spawnNpc(SpawnData data) {
+		NpcComponent component = data.get("component");
+		NpcComponent nc;
+		try {
+			nc = component.getClass().getDeclaredConstructor().newInstance();
+		} catch (Exception e) {
+			System.out.println("new instance error" + e.getCause());
+			return null;
+		}
+		return entityBuilder(data)
+				.type(AnimalVsNpcType.NPC)
+				.view(nc.getImageName())
+                .with(new CollidableComponent(true))
+                .with(nc)
                 .build();
 	}
 	@Spawns("BirdEgg")

@@ -29,12 +29,14 @@ public abstract class UnitComponent extends Component{
     }
 	@Override
     public void onUpdate(double tpf) {
-		performskill();
-        if (timer.elapsed(CD)) {
+		move();
+		if (timer.elapsed(CD)) {
 			performAttack();
 			timer.capture();
 		}
+		performskill();
 	}
+	protected void move() {};
 	protected void performAttack() {};
 	protected void performskill() {};
 }
