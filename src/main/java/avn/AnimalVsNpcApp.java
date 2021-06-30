@@ -10,6 +10,7 @@ import com.almasb.fxgl.texture.Texture;
 import avn.animal.*;
 import avn.collision.AnimalNpcHandler;
 import avn.collision.BulletAnimalHandler;
+import avn.collision.DuckEggNpcHandler;
 import avn.npc.BirdHunterComponent;
 import avn.npc.NpcComponent;
 import javafx.beans.property.BooleanProperty;
@@ -50,6 +51,7 @@ public class AnimalVsNpcApp extends GameApplication {
     protected void initPhysics() {
         getPhysicsWorld().addCollisionHandler(new AnimalNpcHandler());
         getPhysicsWorld().addCollisionHandler(new BulletAnimalHandler());
+        getPhysicsWorld().addCollisionHandler(new DuckEggNpcHandler());
     }
     @Override
     protected void initGame() {
