@@ -22,6 +22,6 @@ public class DuckComponent extends AnimalComponent{
 		SpawnData data = new SpawnData(position)
 							.put("direction", direction)
 							.put("damage", ATK);
-		FXGL.spawn("Bullet", data);
+		FXGL.spawn("DuckEgg", data);
 	}
 }
