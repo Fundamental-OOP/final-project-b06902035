@@ -78,4 +78,17 @@ public class AnimalVsNpcFactory implements EntityFactory{
 				.with("damage", damage)
                 .build();
     }
+	@Spawns("DuckEgg")
+    public Entity spawnDuckEgg(SpawnData data) {
+		Point2D direction = data.get("direction");
+		int damage = data.get("damage");
+        return entityBuilder(data)
+                .type(AnimalVsNpcType.DUCKEGG)
+                .viewWithBBox(new Rectangle(15, 5, Color.AZURE))
+                .with(new CollidableComponent(true))
+                .with(new OffscreenCleanComponent())
+				.with(new ProjectileComponent(direction, 200))
+				.with("damage", damage)
+                .build();
+    }
 }
