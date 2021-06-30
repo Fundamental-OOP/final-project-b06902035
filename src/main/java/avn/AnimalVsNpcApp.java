@@ -68,6 +68,7 @@ public class AnimalVsNpcApp extends GameApplication {
         // TODO: load animal component of newly added animals
         animalComponents.add(new BlueBirdComponent());
         animalComponents.add(new DuckComponent());
+        animalComponents.add(new StupidBirdComponent());
         // TODO: load npc components
         npcComponents.add(new BirdHunterComponent());
 
