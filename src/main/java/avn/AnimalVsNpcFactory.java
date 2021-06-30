@@ -20,6 +20,7 @@ import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;
 
 public class AnimalVsNpcFactory implements EntityFactory{
+
 	@Spawns("Animal")
 	public Entity spawnAnimal(SpawnData data) {
 		AnimalComponent selected = data.get("selected");
@@ -37,6 +38,7 @@ public class AnimalVsNpcFactory implements EntityFactory{
                 .with(ac)
                 .build();
 	}
+	
 	@Spawns("Npc")
 	public Entity spawnNpc(SpawnData data) {
 		NpcComponent component = data.get("component");
@@ -54,6 +56,7 @@ public class AnimalVsNpcFactory implements EntityFactory{
                 .with(nc)
                 .build();
 	}
+	
 	@Spawns("BirdEgg")
 	public Entity spawnBirdEgg(SpawnData data) {
 		return entityBuilder(data)
@@ -65,6 +68,7 @@ public class AnimalVsNpcFactory implements EntityFactory{
 				})
                 .build();
 	}
+	
 	@Spawns("Bullet")
     public Entity spawnBullet(SpawnData data) {
 		Point2D direction = data.get("direction");
