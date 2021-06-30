@@ -2,6 +2,7 @@ package avn;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
@@ -11,6 +12,7 @@ import avn.animal.*;
 import avn.collision.AnimalNpcHandler;
 import avn.collision.BulletAnimalHandler;
 import avn.collision.DuckEggNpcHandler;
+import avn.event.UnitDieEvent;
 import avn.npc.BirdHunterComponent;
 import avn.npc.NpcComponent;
 import javafx.beans.property.BooleanProperty;
@@ -68,6 +70,9 @@ public class AnimalVsNpcApp extends GameApplication {
         // TODO: load npc components
         npcComponents.add(new BirdHunterComponent());
 
+        // set event handlers
+        getEventBus().addEventHandler(UnitDieEvent.ANY, this::onUnitDie);
+
         // schedule the occurrence of npcs
         run(() -> {
             int i = random(0, npcComponents.size()-1);
@@ -78,6 +83,7 @@ public class AnimalVsNpcApp extends GameApplication {
     @Override
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("eggs", 2);
+        vars.put("isOccupied", isOccupied);
     }
     @Override
     protected void initInput() {
@@ -137,6 +143,12 @@ public class AnimalVsNpcApp extends GameApplication {
         getGameWorld().spawn("Npc", spawnData);
     }
     
+    private void onUnitDie(UnitDieEvent event) {
+        Entity unit = event.getUnit();
+        if (unit.getType() == AnimalVsNpcType.ANIMAL) {
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

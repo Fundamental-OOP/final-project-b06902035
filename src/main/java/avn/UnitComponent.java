@@ -3,6 +3,7 @@ package avn;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.LocalTimer;
 
+import avn.event.UnitDieEvent;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -46,6 +47,9 @@ public abstract class UnitComponent extends Component{
 	}
 	protected void die() {
 		// TODO: add dieing animation
+		getEventBus().fireEvent(new UnitDieEvent(entity));
+		boolean[][] isOccupied = geto("isOccupied");
+		isOccupied[0][0] = false;
 		entity.removeFromWorld();
 	}
 }
