@@ -15,6 +15,7 @@ import avn.collision.DuckEggNpcHandler;
 import avn.event.UnitDieEvent;
 import avn.npc.BirdHunterComponent;
 import avn.npc.NpcComponent;
+import avn.util.Helper;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Point2D;
@@ -94,8 +95,9 @@ public class AnimalVsNpcApp extends GameApplication {
             protected void onActionBegin() {
                 // TODO: check eggs >= cost
                 if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
-                    int i = (int)(input.getMousePositionWorld().getX() - 45) / 99;
-                    int j = (int)(input.getMousePositionWorld().getY() - 114) / 118;
+                    int[] grid = Helper.getGridFromPoint(input.getMousePositionWorld());
+                    int i = grid[0];
+                    int j = grid[1];
                     if (!isOccupied[i][j]) {
                         int cost = selected.getCost();
                         inc("eggs", -cost);
