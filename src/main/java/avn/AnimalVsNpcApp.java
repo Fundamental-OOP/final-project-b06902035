@@ -1,6 +1,7 @@
 package avn;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
@@ -10,6 +11,7 @@ import avn.animal.AnimalComponent;
 import avn.animal.AnimalIcon;
 import avn.animal.BlueBirdComponent;
 import avn.collision.AnimalNpcHandler;
+import avn.collision.BulletAnimalHandler;
 import avn.npc.BirdHunterComponent;
 import avn.npc.NpcComponent;
 import javafx.beans.property.BooleanProperty;
@@ -59,6 +61,7 @@ public class AnimalVsNpcApp extends GameApplication {
     @Override
     protected void initPhysics() {
         getPhysicsWorld().addCollisionHandler(new AnimalNpcHandler());
+        getPhysicsWorld().addCollisionHandler(new BulletAnimalHandler());
     }
     @Override
     protected void initGame() {

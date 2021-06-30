@@ -1,6 +1,6 @@
 package avn.npc;
 
-import avn.UnitComponent;
+import avn.components.UnitComponent;
 
 public abstract class NpcComponent extends UnitComponent{
 	protected double speed;

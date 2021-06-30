@@ -8,8 +8,6 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.CollisionHandler;
 
 import avn.AnimalVsNpcType;
-import avn.animal.AnimalComponent;
-import avn.npc.BirdHunterComponent;
 import avn.npc.NpcComponent;
 
 public class AnimalNpcHandler extends CollisionHandler{
