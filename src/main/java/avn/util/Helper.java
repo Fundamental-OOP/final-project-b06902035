@@ -8,6 +8,7 @@ import com.almasb.fxgl.entity.component.Component;
 import avn.UnitComponent;
 import avn.animal.AnimalComponent;
 import avn.npc.NpcComponent;
+import javafx.geometry.Point2D;
 
 public class Helper {
 	public static <T extends Component> T getSubclassComponent(Entity e, Class<T> c) {
@@ -54,5 +55,10 @@ public class Helper {
 		else {
 			System.out.println(e + "is not a unit");
 		}
+	}
+	public static int[] getGridFromPoint(Point2D p) {
+		int i = (int)(p.getX() - 45) / 99;
+        int j = (int)(p.getY() - 114) / 118;
+		return new int[] {i, j};
 	}
 }
