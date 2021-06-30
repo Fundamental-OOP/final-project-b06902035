@@ -7,9 +7,7 @@ import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.texture.Texture;
 
-import avn.animal.AnimalComponent;
-import avn.animal.AnimalIcon;
-import avn.animal.BlueBirdComponent;
+import avn.animal.*;
 import avn.collision.AnimalNpcHandler;
 import avn.collision.BulletAnimalHandler;
 import avn.npc.BirdHunterComponent;
@@ -18,6 +16,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -65,6 +64,8 @@ public class AnimalVsNpcApp extends GameApplication {
     }
     @Override
     protected void initGame() {
+        // set cursor to default
+        getGameScene().setCursor(Cursor.DEFAULT);
         // add factory
         getGameWorld().addEntityFactory(new AnimalVsNpcFactory());
         // set background pic and music
@@ -72,6 +73,7 @@ public class AnimalVsNpcApp extends GameApplication {
         loopBGM("Grasswalk.mp3");
         // TODO: load animal component of newly added animals
         animalComponents.add(new BlueBirdComponent());
+        animalComponents.add(new DuckComponent());
         // TODO: load npc components
         npcComponents.add(new BirdHunterComponent());
 
@@ -80,7 +82,7 @@ public class AnimalVsNpcApp extends GameApplication {
             int i = random(0, npcComponents.size()-1);
             int row = random(0, 4);
             spawnNpc(npcComponents.get(i), row);
-        }, Duration.seconds(3));
+        }, Duration.seconds(10));
     }
     @Override
     protected void initGameVars(Map<String, Object> vars) {
@@ -103,6 +105,7 @@ public class AnimalVsNpcApp extends GameApplication {
                         placeAnimal(Config.spawnPointX[i], Config.spawnPointY[j]);
                         isOccupied[i][j] = true;
                         selected = null;
+                        getGameScene().setCursor(Cursor.DEFAULT);
                     }
                 }
             }
@@ -120,6 +123,7 @@ public class AnimalVsNpcApp extends GameApplication {
             icon.setTranslateY(11);
             icon.setOnMouseClicked(e -> {
                 selected = ac;
+                getGameScene().setCursor(Cursor.HAND);
             });
             getGameScene().addUINode(icon);
         }
