@@ -46,4 +46,10 @@ public class Helper {
 		}
 		return null;
 	}
+	public static void changeEntityHP(Entity e, int amount) {
+		UnitComponent uc = getUnitComponent(e);
+		if (uc != null) {
+			uc.changeHP(amount);
+		}
+	}
 }

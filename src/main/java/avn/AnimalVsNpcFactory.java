@@ -68,12 +68,14 @@ public class AnimalVsNpcFactory implements EntityFactory{
 	@Spawns("Bullet")
     public Entity spawnBullet(SpawnData data) {
 		Point2D direction = data.get("direction");
+		int damage = data.get("damage");
         return entityBuilder(data)
                 .type(AnimalVsNpcType.BULLET)
                 .viewWithBBox(new Rectangle(15, 5, Color.DARKGREY))
                 .with(new CollidableComponent(true))
                 .with(new OffscreenCleanComponent())
 				.with(new ProjectileComponent(direction, 300))
+				.with("damage", damage)
                 .build();
     }
 }

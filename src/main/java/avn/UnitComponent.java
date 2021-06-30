@@ -39,4 +39,13 @@ public abstract class UnitComponent extends Component{
 	protected void move(double tpf) {};
 	protected void performAttack() {};
 	protected void performskill() {};
+	public void changeHP(int amount) {
+		HP += amount;
+		if (HP <= 0)
+			die(); 
+	}
+	protected void die() {
+		// TODO: add dieing animation
+		entity.removeFromWorld();
+	}
 }

@@ -14,7 +14,9 @@ public class BirdHunterComponent extends NpcComponent{
 	protected void performAttack() {
 		Point2D position = entity.getPosition().add(0, 40);
 		Point2D direction = new Point2D(-1, 0);
-		SpawnData data = new SpawnData(position).put("direction", direction);
+		SpawnData data = new SpawnData(position)
+							.put("direction", direction)
+							.put("damage", ATK);
 		FXGL.spawn("Bullet", data);
 	}
 }
