@@ -23,4 +23,11 @@ public class AnimalNpcHandler extends CollisionHandler{
 			nc.setStop();
 		}
     }
+	@Override
+	protected void onCollisionEnd(Entity animal, Entity npc) {
+		NpcComponent nc = Helper.getNpcComponent(npc);
+		if (nc != null) {
+			nc.releaseStop();
+		}
+	}
 }
