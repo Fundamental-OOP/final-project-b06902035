@@ -1,5 +1,7 @@
 package avn.npc;
 
+import javafx.geometry.Point2D;
+
 public class BirdHunterComponent extends NpcComponent{
 
 	public BirdHunterComponent() {

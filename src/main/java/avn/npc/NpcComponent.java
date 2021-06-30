@@ -8,4 +8,8 @@ public abstract class NpcComponent extends UnitComponent{
 		super(atk, hp, range, cd, imageName);
 		this.speed = speed;
 	}
+	@Override
+	protected void move(double tpf) {
+		entity.translateX(-speed * tpf * 60);
+	}
 }
