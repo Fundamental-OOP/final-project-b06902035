@@ -51,5 +51,8 @@ public class Helper {
 		if (uc != null) {
 			uc.changeHP(amount);
 		}
+		else {
+			System.out.println(e + "is not a unit");
+		}
 	}
 }
