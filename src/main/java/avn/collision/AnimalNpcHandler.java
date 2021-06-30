@@ -19,7 +19,6 @@ public class AnimalNpcHandler extends CollisionHandler{
 	}
 	@Override
     protected void onCollisionBegin(Entity animal, Entity npc) {
-		System.out.println("they collude!!!");
 		List<Component> components = npc.getComponents();
 		for (Component c : components) {
 			if (c instanceof NpcComponent) {

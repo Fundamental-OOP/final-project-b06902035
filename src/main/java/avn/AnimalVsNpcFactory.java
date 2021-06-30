@@ -9,10 +9,15 @@ import com.almasb.fxgl.texture.Texture;
 
 import avn.animal.AnimalComponent;
 import avn.npc.NpcComponent;
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
+import com.almasb.fxgl.dsl.components.ProjectileComponent;
 
 public class AnimalVsNpcFactory implements EntityFactory{
 	@Spawns("Animal")
@@ -60,4 +65,15 @@ public class AnimalVsNpcFactory implements EntityFactory{
 				})
                 .build();
 	}
+	@Spawns("Bullet")
+    public Entity spawnBullet(SpawnData data) {
+		Point2D direction = data.get("direction");
+        return entityBuilder(data)
+                .type(AnimalVsNpcType.BULLET)
+                .viewWithBBox(new Rectangle(15, 5, Color.DARKGREY))
+                .with(new CollidableComponent(true))
+                .with(new OffscreenCleanComponent())
+				.with(new ProjectileComponent(direction, 300))
+                .build();
+    }
 }
