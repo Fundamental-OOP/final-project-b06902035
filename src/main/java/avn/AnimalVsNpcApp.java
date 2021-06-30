@@ -68,7 +68,11 @@ public class AnimalVsNpcApp extends GameApplication {
         npcComponents.add(new BirdHunterComponent());
 
         // schedule the occurrence of npcs
-        spawnNpc(npcComponents.get(0), 2);
+        run(() -> {
+            int i = random(0, npcComponents.size()-1);
+            int row = random(0, 4);
+            spawnNpc(npcComponents.get(i), row);
+        }, Duration.seconds(3));
     }
     @Override
     protected void initGameVars(Map<String, Object> vars) {
