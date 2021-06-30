@@ -27,8 +27,8 @@ public class AnimalVsNpcFactory implements EntityFactory{
 		}
 		return entityBuilder(data)
 				.type(AnimalVsNpcType.ANIMAL)
-				.view(selected.getImageName())
-                .with(new CollidableComponent(true))
+				.viewWithBBox(selected.getImageName())
+				.collidable()
                 .with(ac)
                 .build();
 	}
@@ -44,8 +44,8 @@ public class AnimalVsNpcFactory implements EntityFactory{
 		}
 		return entityBuilder(data)
 				.type(AnimalVsNpcType.NPC)
-				.view(nc.getImageName())
-                .with(new CollidableComponent(true))
+				.viewWithBBox(nc.getImageName())
+				.collidable()
                 .with(nc)
                 .build();
 	}
