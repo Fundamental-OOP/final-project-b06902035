@@ -9,6 +9,7 @@ import com.almasb.fxgl.physics.CollisionHandler;
 
 import avn.AnimalVsNpcType;
 import avn.npc.NpcComponent;
+import avn.util.Helper;
 
 public class AnimalNpcHandler extends CollisionHandler{
 
@@ -17,11 +18,9 @@ public class AnimalNpcHandler extends CollisionHandler{
 	}
 	@Override
     protected void onCollisionBegin(Entity animal, Entity npc) {
-		List<Component> components = npc.getComponents();
-		for (Component c : components) {
-			if (c instanceof NpcComponent) {
-				((NpcComponent)c).setStop();
-			}
+		NpcComponent nc = Helper.getNpcComponent(npc);
+		if (nc != null) {
+			nc.setStop();
 		}
     }
 }
