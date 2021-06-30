@@ -1,4 +1,4 @@
-package avn.components;
+package avn;
 
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.LocalTimer;

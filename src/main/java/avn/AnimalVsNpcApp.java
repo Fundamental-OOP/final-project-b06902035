@@ -93,6 +93,7 @@ public class AnimalVsNpcApp extends GameApplication {
             private Rectangle2D worldBounds = new Rectangle2D(45, 114, 895, 589);
             @Override
             protected void onActionBegin() {
+                // TODO: check eggs >= cost
                 if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
                     int i = (int)(input.getMousePositionWorld().getX() - 45) / 99;
                     int j = (int)(input.getMousePositionWorld().getY() - 114) / 118;
