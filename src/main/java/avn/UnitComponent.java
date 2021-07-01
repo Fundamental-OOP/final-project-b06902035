@@ -1,13 +1,19 @@
 package avn;
 
+import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.time.LocalTimer;
 
+import avn.animal.AnimalComponent;
 import avn.event.UnitDieEvent;
 import avn.util.Helper;
+import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
+
+import java.util.List;
 
 // Adding animation part: texture
 import com.almasb.fxgl.texture.AnimatedTexture;
@@ -68,4 +74,25 @@ public abstract class UnitComponent extends Component{
 		isOccupied[grid[0]][grid[1]] = false;
 		entity.removeFromWorld();
 	}
+	protected Entity selectTarget(){
+
+		Point2D p = this.getEntity().getPosition();
+		Rectangle2D searchRange;
+		if(this instanceof AnimalComponent)
+			searchRange =  new Rectangle2D(p.getX(), p.getY(), Range*85.0, 1.0);
+		else
+			searchRange =  new Rectangle2D(p.getX() - Range*85.0, p.getY(), Range*85.0, 1.0);
+
+
+		List<Entity> candidateTarget = getGameWorld().getEntitiesInRange(searchRange);
+
+		for(Entity e : candidateTarget){
+			if(this.getEntity().isType(AnimalVsNpcType.ANIMAL) && e.isType(AnimalVsNpcType.NPC))
+				return e;
+			if(this.getEntity().isType(AnimalVsNpcType.NPC) && e.isType(AnimalVsNpcType.ANIMAL))
+				return e;
+		}
+		return null;
+	}
+
 }
