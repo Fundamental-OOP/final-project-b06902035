@@ -18,6 +18,5 @@ public class StupidBirdComponent extends AnimalComponent{
 	@Override
 	protected void performAttack() {
 		Point2D position = entity.getPosition().add(80, 40);
-                
     }
 }
