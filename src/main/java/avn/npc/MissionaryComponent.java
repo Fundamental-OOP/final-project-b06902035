@@ -68,7 +68,6 @@ public class MissionaryComponent extends NpcComponent{
             if(target== null)
                 return;
             Helper.changeEntityHP(target, ATK);
-            
 		}
 	}
 
