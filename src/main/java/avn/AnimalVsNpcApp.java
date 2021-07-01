@@ -42,7 +42,7 @@ public class AnimalVsNpcApp extends GameApplication {
     AnimalComponent selected;
     // the selected animal component
     // change this when clicking menu icons
-    boolean[][] isOccupied = new boolean[9][5];
+    boolean[][] isOccupied = new boolean[10][5];
 
     @Override
     protected void initSettings(GameSettings settings) {
