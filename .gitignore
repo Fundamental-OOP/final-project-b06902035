@@ -1,4 +1,6 @@
 *.class
+*.swp
+.DS_Store
 
 # Package Files #
 *.war
