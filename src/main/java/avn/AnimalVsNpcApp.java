@@ -14,6 +14,7 @@ import avn.collision.BulletAnimalHandler;
 import avn.collision.DuckEggNpcHandler;
 import avn.event.UnitDieEvent;
 import avn.npc.BirdHunterComponent;
+import avn.npc.MissionaryComponent;
 import avn.npc.NpcComponent;
 import avn.util.Helper;
 import javafx.beans.property.BooleanProperty;
@@ -41,7 +42,7 @@ public class AnimalVsNpcApp extends GameApplication {
     AnimalComponent selected;
     // the selected animal component
     // change this when clicking menu icons
-    boolean[][] isOccupied = new boolean[9][5];
+    boolean[][] isOccupied = new boolean[10][5];
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -71,6 +72,7 @@ public class AnimalVsNpcApp extends GameApplication {
         animalComponents.add(new StupidBirdComponent());
         // TODO: load npc components
         npcComponents.add(new BirdHunterComponent());
+        npcComponents.add(new MissionaryComponent());
 
         // set event handlers
         getEventBus().addEventHandler(UnitDieEvent.ANY, this::onUnitDie);
@@ -140,6 +142,7 @@ public class AnimalVsNpcApp extends GameApplication {
                 .put("selected", selected);
         getGameWorld().spawn("Animal", spawnData);
     }
+    
     private void spawnNpc(NpcComponent nc, int row) {
         SpawnData spawnData = new SpawnData(Config.npcSpawnPoints[row])
                 .put("component", nc);
