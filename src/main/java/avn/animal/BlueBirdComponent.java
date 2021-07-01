@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 public class BlueBirdComponent extends AnimalComponent{
 	public BlueBirdComponent() {
 		// STR, HP, Range, CD, Cost
-		super(0, 200, 0, 10, 1, "BlueBird.gif");
+		super(0, 200, 0, 15, 1, "BlueBird.gif");
 	}
 	@Override
 	protected void performAttack() {
