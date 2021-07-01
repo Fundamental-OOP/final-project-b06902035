@@ -58,6 +58,7 @@ public class BirdHunterComponent extends NpcComponent{
 								.put("direction", direction)
 								.put("damage", ATK);
 			FXGL.spawn("Bullet", data);
+			getAudioPlayer().playSound(getAssetLoader().loadSound("shoot.mp3"));
 		}
 	}
 }

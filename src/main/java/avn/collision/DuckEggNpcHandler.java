@@ -7,6 +7,8 @@ import com.almasb.fxgl.physics.CollisionHandler;
 import avn.AnimalVsNpcType;
 import avn.util.Helper;
 
+import static com.almasb.fxgl.dsl.FXGL.*;
+
 public class DuckEggNpcHandler extends CollisionHandler{
 	public DuckEggNpcHandler() {
 		super(AnimalVsNpcType.DUCKEGG, AnimalVsNpcType.NPC);
@@ -15,6 +17,7 @@ public class DuckEggNpcHandler extends CollisionHandler{
 	protected void onCollisionBegin(Entity duckEgg, Entity npc) {
 		int damage = duckEgg.getInt("damage");
 		duckEgg.removeFromWorld();
+		getAudioPlayer().playSound(getAssetLoader().loadSound("DuckEggHit.mp3"));
 		//FXGL.play("DuckEggHit.mp3");
 		Helper.changeEntityHP(npc, -damage);
     }
