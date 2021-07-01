@@ -13,6 +13,7 @@ public abstract class UnitComponent extends Component{
 	protected int ATK, HP, Range;
 	protected LocalTimer timer;
 	protected Duration CD;
+	boolean hasDoubled = false;
 	String imageName;
 	public UnitComponent(int atk, int hp, int range, int cd, String name) {
 		ATK = atk;
@@ -23,6 +24,13 @@ public abstract class UnitComponent extends Component{
 	}
 	public String getImageName() {
 		return imageName;
+	}
+	public void doubleCD() {
+		if (!hasDoubled) {
+			CD.multiply(2);
+			timer = newLocalTimer();
+			timer.capture();
+		}
 	}
 	@Override
     public void onAdded() {
