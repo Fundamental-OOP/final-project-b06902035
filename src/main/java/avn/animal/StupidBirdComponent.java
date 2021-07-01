@@ -66,6 +66,9 @@ public class StupidBirdComponent extends AnimalComponent{
 		// TODO: flying animation
 		//entity.setPosition(Config.spawnPointX[i], Config.spawnPointY[row]);
 		Point2D dst = new Point2D(Config.spawnPointX[i], Config.spawnPointY[row]);
+		if (entity.hasComponent(MoveComponent.class)) {
+			entity.removeComponent(MoveComponent.class);
+		}
 		entity.addComponent(new MoveComponent(dst, 400));
 	}
 }

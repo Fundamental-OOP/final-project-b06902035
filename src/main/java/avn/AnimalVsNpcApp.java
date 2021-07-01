@@ -12,6 +12,7 @@ import avn.animal.*;
 import avn.collision.AnimalNpcHandler;
 import avn.collision.BulletAnimalHandler;
 import avn.collision.DuckEggNpcHandler;
+import avn.event.NpcReachGoalEvent;
 import avn.event.UnitDieEvent;
 import avn.npc.BirdHunterComponent;
 import avn.npc.MissionaryComponent;
@@ -76,6 +77,7 @@ public class AnimalVsNpcApp extends GameApplication {
 
         // set event handlers
         getEventBus().addEventHandler(UnitDieEvent.ANY, this::onUnitDie);
+        getEventBus().addEventHandler(NpcReachGoalEvent.ANY, e -> gameOver());
 
         // schedule the occurrence of npcs
         run(() -> {
@@ -96,13 +98,20 @@ public class AnimalVsNpcApp extends GameApplication {
             private Rectangle2D worldBounds = new Rectangle2D(45, 114, 895, 589);
             @Override
             protected void onActionBegin() {
-                // TODO: check eggs >= cost
-                if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
+                int cost;
+                try {
+                    cost = selected.getCost();
+                } catch (Exception e) {
+                    return;
+                }
+                if (geti("eggs") < cost) {
+                    selected = null;
+                }
+                else if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
                     int[] grid = Helper.getGridFromPoint(input.getMousePositionWorld());
                     int i = grid[0];
                     int j = grid[1];
                     if (!isOccupied[i][j]) {
-                        int cost = selected.getCost();
                         inc("eggs", -cost);
                         placeAnimal(Config.spawnPointX[i], Config.spawnPointY[j]);
                         isOccupied[i][j] = true;
@@ -155,6 +164,9 @@ public class AnimalVsNpcApp extends GameApplication {
         }
     }
 
+    private void gameOver() {
+        getDialogService().showMessageBox("Game Over!!!", getGameController()::exit);
+    }
     public static void main(String[] args) {
         launch(args);
     }

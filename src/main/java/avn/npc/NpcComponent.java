@@ -1,10 +1,12 @@
 package avn.npc;
 
 import avn.UnitComponent;
+import avn.event.NpcReachGoalEvent;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.shape.Rectangle;
 import avn.AnimalVsNpcType;
+import avn.Config;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -36,6 +38,9 @@ public abstract class NpcComponent extends UnitComponent{
 		stop = false;
 		if (!stop) {
 			entity.translateX(-speed * tpf * 60);
+			if (entity.getPosition().getX() <= Config.spawnPointX[0]) {
+				getEventBus().fireEvent(new NpcReachGoalEvent());
+			}
 		}
 	}
 	public void setStop() {
