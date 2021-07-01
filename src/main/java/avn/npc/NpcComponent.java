@@ -4,7 +4,6 @@ import avn.UnitComponent;
 import avn.event.NpcReachGoalEvent;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.shape.Rectangle;
 import avn.AnimalVsNpcType;
 import avn.Config;
 

@@ -1,20 +1,12 @@
 package avn.npc;
 
 
-import java.util.function.DoubleUnaryOperator;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.SpawnData;
-
-import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
-
-import com.almasb.fxgl.time.LocalTimer;
-
 import avn.util.Helper;
-
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 

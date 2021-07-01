@@ -8,7 +8,6 @@ import com.almasb.fxgl.entity.components.BoundingBoxComponent;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
-import com.almasb.fxgl.texture.Texture;
 
 import avn.animal.AnimalComponent;
 import avn.npc.NpcComponent;

@@ -1,12 +1,7 @@
 package avn.collision;
 
-import java.util.List;
-
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.CollisionHandler;
-
 import avn.AnimalVsNpcType;
 import avn.npc.NpcComponent;
 import avn.util.Helper;

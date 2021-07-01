@@ -7,7 +7,6 @@ import javafx.geometry.Point2D;
 import javafx.util.Duration;
 
 
-import com.almasb.fxgl.time.LocalTimer;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 
