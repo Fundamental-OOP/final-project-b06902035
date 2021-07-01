@@ -2,22 +2,25 @@ package avn;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.texture.Texture;
 
-import avn.animal.AnimalComponent;
-import avn.animal.AnimalIcon;
-import avn.animal.BlueBirdComponent;
+import avn.animal.*;
 import avn.collision.AnimalNpcHandler;
 import avn.collision.BulletAnimalHandler;
+import avn.collision.DuckEggNpcHandler;
+import avn.event.UnitDieEvent;
 import avn.npc.BirdHunterComponent;
 import avn.npc.NpcComponent;
+import avn.util.Helper;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -31,17 +34,6 @@ import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * This is an example of a tower defense game.
- *
- * Demo:
- * 1. Enemies move using waypoints
- * 2. Player can place towers
- * 3. Towers can shoot enemies
- * 4. Game ends if enemies are dead or have reached the last waypoint
- *
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class AnimalVsNpcApp extends GameApplication {
 
     List<NpcComponent> npcComponents = new ArrayList<>();
@@ -62,9 +54,12 @@ public class AnimalVsNpcApp extends GameApplication {
     protected void initPhysics() {
         getPhysicsWorld().addCollisionHandler(new AnimalNpcHandler());
         getPhysicsWorld().addCollisionHandler(new BulletAnimalHandler());
+        getPhysicsWorld().addCollisionHandler(new DuckEggNpcHandler());
     }
     @Override
     protected void initGame() {
+        // set cursor to default
+        getGameScene().setCursor(Cursor.DEFAULT);
         // add factory
         getGameWorld().addEntityFactory(new AnimalVsNpcFactory());
         // set background pic and music
@@ -72,19 +67,25 @@ public class AnimalVsNpcApp extends GameApplication {
         loopBGM("Grasswalk.mp3");
         // TODO: load animal component of newly added animals
         animalComponents.add(new BlueBirdComponent());
+        animalComponents.add(new DuckComponent());
+        animalComponents.add(new StupidBirdComponent());
         // TODO: load npc components
         npcComponents.add(new BirdHunterComponent());
+
+        // set event handlers
+        getEventBus().addEventHandler(UnitDieEvent.ANY, this::onUnitDie);
 
         // schedule the occurrence of npcs
         run(() -> {
             int i = random(0, npcComponents.size()-1);
             int row = random(0, 4);
             spawnNpc(npcComponents.get(i), row);
-        }, Duration.seconds(3));
+        }, Duration.seconds(10));
     }
     @Override
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("eggs", 2);
+        vars.put("isOccupied", isOccupied);
     }
     @Override
     protected void initInput() {
@@ -95,20 +96,21 @@ public class AnimalVsNpcApp extends GameApplication {
             protected void onActionBegin() {
                 // TODO: check eggs >= cost
                 if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
-                    int i = (int)(input.getMousePositionWorld().getX() - 45) / 99;
-                    int j = (int)(input.getMousePositionWorld().getY() - 114) / 118;
+                    int[] grid = Helper.getGridFromPoint(input.getMousePositionWorld());
+                    int i = grid[0];
+                    int j = grid[1];
                     if (!isOccupied[i][j]) {
                         int cost = selected.getCost();
                         inc("eggs", -cost);
                         placeAnimal(Config.spawnPointX[i], Config.spawnPointY[j]);
                         isOccupied[i][j] = true;
                         selected = null;
+                        getGameScene().setCursor(Cursor.DEFAULT);
                     }
                 }
             }
         }, MouseButton.PRIMARY);
     }
-
     @Override
     protected void initUI() {
         // set icon on the top memu bar
@@ -120,6 +122,7 @@ public class AnimalVsNpcApp extends GameApplication {
             icon.setTranslateY(11);
             icon.setOnMouseClicked(e -> {
                 selected = ac;
+                getGameScene().setCursor(Cursor.HAND);
             });
             getGameScene().addUINode(icon);
         }
@@ -131,6 +134,7 @@ public class AnimalVsNpcApp extends GameApplication {
         uiEggs.textProperty().bind(getip("eggs").asString());
         getGameScene().addUINode(uiEggs);
     }
+    
     private void placeAnimal(int x, int y) {
         SpawnData spawnData = new SpawnData(x, y)
                 .put("selected", selected);
@@ -141,6 +145,13 @@ public class AnimalVsNpcApp extends GameApplication {
                 .put("component", nc);
         getGameWorld().spawn("Npc", spawnData);
     }
+    
+    private void onUnitDie(UnitDieEvent event) {
+        Entity unit = event.getUnit();
+        if (unit.getType() == AnimalVsNpcType.ANIMAL) {
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
