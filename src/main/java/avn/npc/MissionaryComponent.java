@@ -4,6 +4,7 @@ package avn.npc;
 import java.util.function.DoubleUnaryOperator;
 
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 
 import javafx.geometry.Point2D;
@@ -11,6 +12,9 @@ import javafx.util.Duration;
 
 
 import com.almasb.fxgl.time.LocalTimer;
+
+import avn.util.Helper;
+
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 
@@ -60,12 +64,11 @@ public class MissionaryComponent extends NpcComponent{
     @Override
 	protected void performAttack() {
 		if (animalInRange) {
-			Point2D position = entity.getPosition().add(0, 40);
-			Point2D direction = new Point2D(-1, 0);
-			SpawnData data = new SpawnData(position)
-								.put("direction", direction)
-								.put("damage", ATK);
-			FXGL.spawn("Bullet", data);
+			Entity target = selectTarget();
+            if(target== null)
+                return;
+            Helper.changeEntityHP(target, ATK);
+            
 		}
 	}
 
