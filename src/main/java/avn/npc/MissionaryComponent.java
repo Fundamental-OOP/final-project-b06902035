@@ -1,5 +1,8 @@
 package avn.npc;
 
+
+import java.util.function.DoubleUnaryOperator;
+
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.SpawnData;
 
@@ -13,25 +16,29 @@ import com.almasb.fxgl.texture.AnimationChannel;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-public class BirdHunterComponent extends NpcComponent{
+
+public class MissionaryComponent extends NpcComponent{
 
     private AnimationChannel animWalk, animAttack;
 
-	public BirdHunterComponent() {
-		super(50, 200, 3, 2, 0.1, "");
-        animWalk = new AnimationChannel(FXGL.image("HunterWalk_176x80.png"), 2, 88, 80, Duration.seconds(0.8), 0, 1);
-        animAttack = new AnimationChannel(FXGL.image("HunterAttack_174x80.png"), 2, 87, 80, Duration.seconds(0.5), 0, 1);
+    public MissionaryComponent(){
+        super(50, 200, 1, 2, 0.1, "");
+        
+        animWalk = new AnimationChannel(FXGL.image("Missionary.png"), 1, 90, 97, Duration.seconds(1), 0, 0);
+        animAttack = new AnimationChannel(FXGL.image("Missionary.png"), 1, 90, 97, Duration.seconds(1), 0, 0);
         this.texture = new AnimatedTexture(animWalk);
         this.texture.loop();
-	}
-	@Override
+    }
+
+    @Override
     public void onAdded() {
         timer = newLocalTimer();
 		timer.capture();
         // for animation:
         entity.getViewComponent().addChild(texture);
     }
-	@Override
+
+    @Override
     public void onUpdate(double tpf) {
 		move(tpf);
 		if (timer.elapsed(CD)) {
@@ -49,7 +56,8 @@ public class BirdHunterComponent extends NpcComponent{
         }
 		performskill();
 	}
-	@Override
+
+    @Override
 	protected void performAttack() {
 		if (animalInRange) {
 			Point2D position = entity.getPosition().add(0, 40);
@@ -60,4 +68,5 @@ public class BirdHunterComponent extends NpcComponent{
 			FXGL.spawn("Bullet", data);
 		}
 	}
+
 }
