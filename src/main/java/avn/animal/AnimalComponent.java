@@ -1,12 +1,6 @@
 package avn.animal;
-
-import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.time.LocalTimer;
-
 import avn.UnitComponent;
-import javafx.util.Duration;
 
-import static com.almasb.fxgl.dsl.FXGL.*;
 
 public abstract class AnimalComponent extends UnitComponent{
 	int Cost;

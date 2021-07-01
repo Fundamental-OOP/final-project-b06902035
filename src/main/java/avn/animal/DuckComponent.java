@@ -1,14 +1,9 @@
 package avn.animal;
 
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
-import com.almasb.fxgl.time.LocalTimer;
-
 import javafx.geometry.Point2D;
-import javafx.util.Duration;
 
-import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DuckComponent extends AnimalComponent{
 	public DuckComponent() {

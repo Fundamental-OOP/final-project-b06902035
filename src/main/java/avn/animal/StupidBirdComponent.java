@@ -1,23 +1,9 @@
 package avn.animal;
 
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.SpawnData;
-import com.almasb.fxgl.time.LocalTimer;
-
-import org.w3c.dom.ranges.Range;
-
-import avn.AnimalVsNpcType;
 import avn.Config;
-import avn.npc.NpcComponent;
 import avn.util.Helper;
-import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
-import javafx.util.Duration;
-
 import static com.almasb.fxgl.dsl.FXGL.*;
-
-import java.util.List;
 
 public class StupidBirdComponent extends AnimalComponent{
 
