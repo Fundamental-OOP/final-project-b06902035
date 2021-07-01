@@ -8,7 +8,7 @@ import javafx.geometry.Point2D;
 public class DuckComponent extends AnimalComponent{
 	public DuckComponent() {
 		// STR, HP, Range, CD, Cost
-		super(50, 200, 10000, 2, 2, "Duck.jpg");
+		super(50, 200, 10000, 2, 2, "Duck.gif");
 	}
 	@Override
 	protected void performAttack() {

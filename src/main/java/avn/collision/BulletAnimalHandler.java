@@ -5,6 +5,7 @@ import com.almasb.fxgl.physics.CollisionHandler;
 
 import avn.AnimalVsNpcType;
 import avn.util.Helper;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class BulletAnimalHandler extends CollisionHandler{
 	public BulletAnimalHandler() {
@@ -15,5 +16,6 @@ public class BulletAnimalHandler extends CollisionHandler{
 		int damage = bullet.getInt("damage");
 		bullet.removeFromWorld();
 		Helper.changeEntityHP(animal, -damage);
+		getAudioPlayer().playSound(getAssetLoader().loadSound("BulletHit.mp3"));
     }
 }

@@ -2,7 +2,11 @@ package avn.animal;
 
 import com.almasb.fxgl.entity.Entity;
 import avn.Config;
+import avn.MoveComponent;
+import avn.npc.NpcComponent;
 import avn.util.Helper;
+import javafx.geometry.Point2D;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class StupidBirdComponent extends AnimalComponent{
@@ -49,6 +53,11 @@ public class StupidBirdComponent extends AnimalComponent{
 	
 	private void flyToPosition(int i, int row) {
 		// TODO: flying animation
-		entity.setPosition(Config.spawnPointX[i], Config.spawnPointY[row]);
+		//entity.setPosition(Config.spawnPointX[i], Config.spawnPointY[row]);
+		Point2D dst = new Point2D(Config.spawnPointX[i], Config.spawnPointY[row]);
+		if (entity.hasComponent(MoveComponent.class)) {
+			entity.removeComponent(MoveComponent.class);
+		}
+		entity.addComponent(new MoveComponent(dst, 400));
 	}
 }

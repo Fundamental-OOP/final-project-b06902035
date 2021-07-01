@@ -73,6 +73,9 @@ public abstract class UnitComponent extends Component{
 		int[] grid = Helper.getGridFromPoint(entity.getPosition().add(40, 40));
 		isOccupied[grid[0]][grid[1]] = false;
 		entity.removeFromWorld();
+		if (entity.isType(AnimalVsNpcType.NPC)) {
+			getAudioPlayer().playSound(getAssetLoader().loadSound("HunterDead.mp3"));
+		}
 	}
 	protected Entity selectTarget(){
 
