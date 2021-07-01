@@ -106,6 +106,7 @@ public class AnimalVsNpcApp extends GameApplication {
                 }
                 if (geti("eggs") < cost) {
                     selected = null;
+                    getGameScene().setCursor(Cursor.DEFAULT);
                 }
                 else if (selected != null && worldBounds.contains(input.getMousePositionWorld())) {
                     int[] grid = Helper.getGridFromPoint(input.getMousePositionWorld());

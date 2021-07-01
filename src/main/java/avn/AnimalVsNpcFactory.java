@@ -4,7 +4,10 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.entity.components.BoundingBoxComponent;
 import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.physics.BoundingShape;
+import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.texture.Texture;
 
 import avn.animal.AnimalComponent;
@@ -49,12 +52,15 @@ public class AnimalVsNpcFactory implements EntityFactory{
 			System.out.println("new instance error" + e.getCause());
 			return null;
 		}
-		return entityBuilder(data)
-				.type(AnimalVsNpcType.NPC)
-				.viewWithBBox(nc.getImageName())
-				.collidable()
-                .with(nc)
-                .build();
+		Entity e =  entityBuilder(data)
+					.type(AnimalVsNpcType.NPC)
+					.collidable()
+                	.with(nc)
+                	.build();
+		e.getComponent(BoundingBoxComponent.class).clearHitBoxes();
+		HitBox b = new HitBox(BoundingShape.box(80, 80));
+		e.getComponent(BoundingBoxComponent.class).addHitBox(b);
+		return e;
 	}
 	
 	@Spawns("BirdEgg")
